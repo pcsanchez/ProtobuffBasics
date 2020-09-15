@@ -1,0 +1,49 @@
+// The syntax for this file is proto3
+syntax = "proto3";
+
+import "date.proto";
+
+package person;
+
+// Person is used to identify users
+// across our system.
+message Person {
+    // The age as of the person's creation.
+    int32 age = 1;
+    // The first name as documented in the signup form.
+    string first_name = 2;
+    string last_name = 3;
+    // Small picture represents a small .jpg file.
+    bytes picture = 4;
+    bool profile_verified = 5;
+    // Height of the person in cms.
+    float height = 6;
+
+    // A list of phone numbers that is optional to
+    // provide at signup.
+    repeated string phone_numbers = 7;
+
+    // We currently consider 3 eye colors.
+    enum EyeColor {
+        UNKNOWN_EYE_COLOR = 0;
+        EYE_GREEN = 1;
+        EYE_BROWN = 2;
+        EYE_BLUE = 3;
+    }
+
+    EyeColor eye_color = 8;
+
+    date.Date birthday = 9;
+
+    // We define the type Address withint person.
+    message Address {
+        string address_line_1 = 1;
+        string address_line_2 = 2;
+        string zip_code = 3;
+        string city = 4;
+        string country = 5;
+    }
+
+    // Multiple addresses.
+    repeated Address addresses = 10;
+}
